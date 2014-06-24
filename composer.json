@@ -2,6 +2,7 @@
     "name": "drupal/tangler",
     "require": {
         "symfony/filesystem": "*@stable",
+        "symfony/finder": "*@stable",
         "composer/composer": "*@dev",
         "composer/installers": "*@dev"
     },
