@@ -58,10 +58,19 @@ class Mapper
             ->getCanonicalPackages();
         foreach ($packages as $package) {
             if ($drupalType = $this->getDrupalType($package)) {
-                $name = explode('/', $package->getPrettyName())[1];
                 $installPath = $im->getInstaller($package->getType())
                     ->getInstallPath($package);
-                $typeInstallMap[$drupalType][$installPath] = sprintf($typePathMap[$drupalType], $name);
+                if (strpos($installPath, $root = $this->getRoot()) !== false) {
+                    $installPath = $this->getFS()->makePathRelative(
+                        $installPath,
+                        $root
+                    );
+                }
+                $name = explode('/', $package->getPrettyName())[1];
+                $typeInstallMap[$drupalType][rtrim($installPath, '/')] = sprintf(
+                    $typePathMap[$drupalType],
+                    $name
+                );
             }
         }
         return array_intersect_key($typeInstallMap, $typePathMap);
@@ -117,10 +126,10 @@ class Mapper
                         getcwd()
                     ), '/');
                     $fs->symlink(
-                        $fs->makePathRelative(
-                            rtrim("$root$installPath", '/'),
-                            $dest
-                        ),
+                        substr($fs->makePathRelative(
+                            "$root$installPath",
+                            "$root$dest"
+                        ), 3),
                         $dest,
                         true
                     );
