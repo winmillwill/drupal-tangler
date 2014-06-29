@@ -122,17 +122,22 @@ class Mapper
             foreach ($pathMap as $installPath => $targetPath) {
                 if ($fs->exists("$root/$installPath")) {
                     $dest = rtrim($fs->makePathRelative(
-                        rtrim("$root$targetPath", '/'),
+                        "$root$targetPath",
                         getcwd()
                     ), '/');
-                    $fs->symlink(
-                        substr($fs->makePathRelative(
-                            "$root$installPath",
-                            "$root$dest"
-                        ), 3),
-                        $dest,
-                        true
-                    );
+                    if ($type === 'core') {
+                        $fs->mirror("$root$installPath", "$root$dest");
+                    }
+                    else {
+                        $fs->symlink(
+                            substr($fs->makePathRelative(
+                                "$root$installPath",
+                                "$root$dest"
+                            ), 3),
+                            $dest,
+                            true
+                        );
+                    }
                 }
             }
         }
