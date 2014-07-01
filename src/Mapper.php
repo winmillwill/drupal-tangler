@@ -97,7 +97,6 @@ class Mapper
     {
         if (!$this->name) {
             foreach ($this->getCustomFilesFinder() as $file) {
-                echo $file->getFilename() . "\n";
                 if (preg_match('/(.*)\.info(\.yml)?/', $file->getFilename(), $matches)) {
                     $this->name = $matches[1];
                 }
