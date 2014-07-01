@@ -15,5 +15,6 @@
     "repositories": [{
             "type": "composer",
             "url": "http://drupal-packagist.org"
-    }]
+    }],
+    "bin": ["bin/drupal_tangle]
 }
