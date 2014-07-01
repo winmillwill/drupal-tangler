@@ -12,6 +12,12 @@ class Mapper
     private $fs     = false;
     private $finder = false;
     private $root   = false;
+    private $name   = false;
+
+    public function __construct($path = null, $drupal = null) {
+        $this->root   = $path;
+        $this->drupal = $drupal;
+    }
 
     private function getFS()
     {
@@ -76,26 +82,45 @@ class Mapper
         return array_intersect_key($typeInstallMap, $typePathMap);
     }
 
+    private function getCustomFilesFinder()
+    {
+        $finder = $this->getFinder()
+            ->ignoreUnreadableDirs()
+            ->ignoreVCS(true)
+            ->exclude(['vendor', 'www'])
+            ->depth('== 0')
+            ->in($this->getRoot());
+        return $finder;
+    }
+
+    private function getName()
+    {
+        if (!$this->name) {
+            foreach ($this->getCustomFilesFinder() as $file) {
+                echo $file->getFilename() . "\n";
+                if (preg_match('/(.*)\.info(\.yml)?/', $file->getFilename(), $matches)) {
+                    $this->name = $matches[1];
+                }
+            }
+        }
+        if (!$this->name) {
+            throw new \Exception('No drupal info file found');
+        }
+        return $this->name;
+    }
+
     public function mapCustom()
     {
         $root   = $this->getRoot();
-        $custom = "$root/drupal";
         $fs     = $this->getFS();
         $paths  = [];
-        foreach (['module', 'theme', 'profile'] as $type) {
-            if ($fs->exists("$custom/{$type}s")) {
-                $finder = $this->getFinder()
-                    ->ignoreUnreadableDirs()
-                    ->depth('== 0')
-                    ->in("$custom/{$type}s");
-                foreach ($finder as $file) {
-                    $install = $fs->makePathRelative($file->getRealpath(), $root);
-                    $paths["custom_$type"][$install] = sprintf(
-                        $this->getTypePathMap($type),
-                        $file->getFilename()
-                    );
-                }
-            }
+        foreach ($this->getCustomFilesFinder() as $file) {
+            $install = $fs->makePathRelative($file->getRealpath(), $root);
+            $paths["custom"][$install] = sprintf(
+                $this->getTypePathMap('module').'/%s',
+                $this->getName(),
+                $file->getFilename()
+            );
         }
         return $paths;
     }
@@ -103,14 +128,14 @@ class Mapper
     public function mapFiles()
     {
         return [
-            'files' => ['cnf/files' => 'www/sites/default/files']
+            'files' => ['cnf/files' => $this->drupal.'/sites/default/files']
         ];
     }
 
     public function mapSettings()
     {
         return [
-            'settings' => ['cnf/settings.php' => 'www/sites/default/settings.php']
+            'settings' => ['cnf/settings.php' => $this->drupal.'/sites/default/settings.php']
         ];
     }
 
@@ -151,10 +176,10 @@ class Mapper
     public function getTypePathMap($type = null)
     {
         $map = [
-            'core'    => 'www',
-            'module'  => 'www/sites/all/modules/contrib/%s',
-            'theme'   => 'www/sites/all/themes/%s',
-            'profile' => 'www/profiles/%s'
+            'core'    => $this->drupal,
+            'module'  => $this->drupal.'/sites/all/modules/%s',
+            'theme'   => $this->drupal.'/sites/all/themes/%s',
+            'profile' => $this->drupal.'/profiles/%s'
         ];
         if ($type) {
             return $map[$type];

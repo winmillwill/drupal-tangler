@@ -2,24 +2,15 @@
     "name": "drupal/tangler",
     "require": {
         "symfony/filesystem": "*@stable",
-        "symfony/finder": "*@stable"
-    },
-    "require-dev": {
-        "drupal/drupal": "7.*",
-        "drupal/panels": "7.*"
+        "symfony/finder": "*@stable",
+        "drupal/views": "7.*",
+        "symfony/console": "*",
+        "composer/composer": "*@dev"
     },
     "autoload": {
         "psr-4": {
             "Drupal\\Tangler\\": "src/"
         }
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "Drupal\\Tangler\\ScriptHandler::postUpdate"
-        ],
-        "post-update-cmd": [
-            "Drupal\\Tangler\\ScriptHandler::postUpdate"
-        ]
     },
     "repositories": [{
             "type": "composer",
