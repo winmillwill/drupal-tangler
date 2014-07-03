@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "72abb70c864072e16839724407fc1a29",
+    "hash": "dc2bff2791a245ef9b1da34ad59e4616",
     "packages": [
         {
             "name": "composer/composer",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "745dcbce3317f7119575c39cef2cb601f9c5ffcf"
+                "reference": "e77435cd0c984e2031d915a6b42648e7b284dd5c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/745dcbce3317f7119575c39cef2cb601f9c5ffcf",
-                "reference": "745dcbce3317f7119575c39cef2cb601f9c5ffcf",
+                "url": "https://api.github.com/repos/composer/composer/zipball/e77435cd0c984e2031d915a6b42648e7b284dd5c",
+                "reference": "e77435cd0c984e2031d915a6b42648e7b284dd5c",
                 "shasum": ""
             },
             "require": {
@@ -74,7 +74,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2014-06-29 16:49:45"
+            "time": "2014-07-02 15:44:54"
         },
         {
             "name": "composer/installers",

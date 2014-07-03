@@ -13,8 +13,8 @@
         }
     },
     "repositories": [{
-            "type": "composer",
-            "url": "http://drupal-packagist.org"
+        "type": "composer",
+        "url": "http://static.drupal-packagist.org/v0.0.1"
     }],
-    "bin": ["bin/drupal_tangle]
+    "bin": ["bin/drupal_tangle"]
 }
