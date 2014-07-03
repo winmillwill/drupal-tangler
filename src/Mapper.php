@@ -114,7 +114,7 @@ class Mapper
         $fs     = $this->getFS();
         $paths  = [];
         foreach ($this->getCustomFilesFinder() as $file) {
-            $install = $fs->makePathRelative($file->getRealpath(), $root);
+            $install = rtrim($fs->makePathRelative($file->getRealpath(), $root), '/');
             $paths["custom"][$install] = sprintf(
                 $this->getTypePathMap('module').'/%s',
                 $this->getName(),
@@ -154,10 +154,10 @@ class Mapper
                     }
                     else {
                         $fs->symlink(
-                            substr($fs->makePathRelative(
+                            substr(rtrim($fs->makePathRelative(
                                 "$root/$installPath",
                                 "$root/$dest"
-                            ), 3),
+                            ), '/'), 3),
                             $dest,
                             true
                         );
