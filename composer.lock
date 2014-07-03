@@ -4,24 +4,24 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "dc2bff2791a245ef9b1da34ad59e4616",
+    "hash": "422f2c122fe92d6b4d916ff6ea9187a9",
     "packages": [
         {
             "name": "composer/composer",
-            "version": "dev-master",
+            "version": "1.0.0-alpha8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "e77435cd0c984e2031d915a6b42648e7b284dd5c"
+                "reference": "1eb1df44a97fb2daca1bb8b007f3bee012f0aa46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/e77435cd0c984e2031d915a6b42648e7b284dd5c",
-                "reference": "e77435cd0c984e2031d915a6b42648e7b284dd5c",
+                "url": "https://api.github.com/repos/composer/composer/zipball/1eb1df44a97fb2daca1bb8b007f3bee012f0aa46",
+                "reference": "1eb1df44a97fb2daca1bb8b007f3bee012f0aa46",
                 "shasum": ""
             },
             "require": {
-                "justinrainbow/json-schema": "~1.1",
+                "justinrainbow/json-schema": "1.1.*",
                 "php": ">=5.3.2",
                 "seld/jsonlint": "1.*",
                 "symfony/console": "~2.3",
@@ -67,352 +67,33 @@
                     "role": "Developer"
                 }
             ],
-            "description": "Composer helps you declare, manage and install dependencies of PHP projects, ensuring you have the right stack everywhere.",
+            "description": "Dependency Manager",
             "homepage": "http://getcomposer.org/",
             "keywords": [
                 "autoload",
                 "dependency",
                 "package"
             ],
-            "time": "2014-07-02 15:44:54"
-        },
-        {
-            "name": "composer/installers",
-            "version": "v1.0.15",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/composer/installers.git",
-                "reference": "8e6a72a78f6cfd537fde3350720dfdc9ae3c5621"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/8e6a72a78f6cfd537fde3350720dfdc9ae3c5621",
-                "reference": "8e6a72a78f6cfd537fde3350720dfdc9ae3c5621",
-                "shasum": ""
-            },
-            "replace": {
-                "roundcube/plugin-installer": "*",
-                "shama/baton": "*"
-            },
-            "require-dev": {
-                "composer/composer": "1.0.*@dev",
-                "phpunit/phpunit": "4.1.*"
-            },
-            "type": "composer-installer",
-            "extra": {
-                "class": "Composer\\Installers\\Installer",
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Composer\\Installers\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kyle Robinson Young",
-                    "email": "kyle@dontkry.com",
-                    "homepage": "https://github.com/shama",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A multi-framework Composer library installer",
-            "homepage": "http://composer.github.com/installers/",
-            "keywords": [
-                "Craft",
-                "Dolibarr",
-                "Hurad",
-                "MODX Evo",
-                "OXID",
-                "WolfCMS",
-                "agl",
-                "annotatecms",
-                "bitrix",
-                "cakephp",
-                "codeigniter",
-                "concrete5",
-                "croogo",
-                "drupal",
-                "elgg",
-                "fuelphp",
-                "installer",
-                "joomla",
-                "kohana",
-                "laravel",
-                "lithium",
-                "magento",
-                "mako",
-                "mediawiki",
-                "modulework",
-                "moodle",
-                "phpbb",
-                "piwik",
-                "ppi",
-                "roundcube",
-                "shopware",
-                "silverstripe",
-                "symfony",
-                "typo3",
-                "wordpress",
-                "zend",
-                "zikula"
-            ],
-            "time": "2014-06-23 16:25:28"
-        },
-        {
-            "name": "drupal/advanced_help",
-            "version": "7.1.1",
-            "source": {
-                "type": "git",
-                "url": "http://git.drupal.org/project/advanced_help",
-                "reference": "e5c25ae431f03a6c6146a581d739f1a0048175db"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "http://ftp.drupal.org/files/projects/advanced_help-7.x-1.1.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "composer/installers": "~1.0",
-                "drupal/drupal": "7.*"
-            },
-            "replace": {
-                "drupal/help_example": "self.version"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-7.x-1.x": "7.1.x"
-                }
-            },
-            "notification-url": "http://drupal-packagist.org/downloads/",
-            "description": "Allow advanced help and documentation."
-        },
-        {
-            "name": "drupal/ctools",
-            "version": "7.1.4",
-            "source": {
-                "type": "git",
-                "url": "http://git.drupal.org/project/ctools",
-                "reference": "5438b40dbe532af6a7eca891c86eaef845bff945"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "http://ftp.drupal.org/files/projects/ctools-7.x-1.4.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "composer/installers": "~1.0",
-                "drupal/advanced_help": "7.*",
-                "drupal/color": "7.*",
-                "drupal/drupal": "7.*",
-                "drupal/panels": "7.*",
-                "drupal/views": "7.*"
-            },
-            "replace": {
-                "drupal/bulk_export": "self.version",
-                "drupal/ctools_access_ruleset": "self.version",
-                "drupal/ctools_ajax_sample": "self.version",
-                "drupal/ctools_custom_content": "self.version",
-                "drupal/ctools_plugin_example": "self.version",
-                "drupal/page_manager": "self.version",
-                "drupal/stylizer": "self.version",
-                "drupal/term_depth": "self.version",
-                "drupal/views_content": "self.version"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-7.x-1.x": "7.1.x"
-                }
-            },
-            "notification-url": "http://drupal-packagist.org/downloads/",
-            "description": "A library of helpful tools by Merlin of Chaos."
-        },
-        {
-            "name": "drupal/drupal",
-            "version": "7.28.0",
-            "source": {
-                "type": "git",
-                "url": "http://git.drupal.org/project/drupal",
-                "reference": "23599090784700dea3675270d0eb242badf9fb28"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "http://ftp.drupal.org/files/projects/drupal-7.28.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "replace": {
-                "drupal/aggregator": "self.version",
-                "drupal/bartik": "self.version",
-                "drupal/block": "self.version",
-                "drupal/blog": "self.version",
-                "drupal/book": "self.version",
-                "drupal/color": "self.version",
-                "drupal/comment": "self.version",
-                "drupal/contact": "self.version",
-                "drupal/contextual": "self.version",
-                "drupal/dashboard": "self.version",
-                "drupal/dblog": "self.version",
-                "drupal/field": "self.version",
-                "drupal/field_sql_storage": "self.version",
-                "drupal/field_ui": "self.version",
-                "drupal/file": "self.version",
-                "drupal/filter": "self.version",
-                "drupal/forum": "self.version",
-                "drupal/garland": "self.version",
-                "drupal/help": "self.version",
-                "drupal/image": "self.version",
-                "drupal/list": "self.version",
-                "drupal/locale": "self.version",
-                "drupal/menu": "self.version",
-                "drupal/minimal": "self.version",
-                "drupal/node": "self.version",
-                "drupal/number": "self.version",
-                "drupal/openid": "self.version",
-                "drupal/options": "self.version",
-                "drupal/overlay": "self.version",
-                "drupal/path": "self.version",
-                "drupal/php": "self.version",
-                "drupal/poll": "self.version",
-                "drupal/profile": "self.version",
-                "drupal/rdf": "self.version",
-                "drupal/search": "self.version",
-                "drupal/search_embedded_form": "self.version",
-                "drupal/search_extra_type": "self.version",
-                "drupal/seven": "self.version",
-                "drupal/shortcut": "self.version",
-                "drupal/standard": "self.version",
-                "drupal/stark": "self.version",
-                "drupal/statistics": "self.version",
-                "drupal/syslog": "self.version",
-                "drupal/system": "self.version",
-                "drupal/taxonomy": "self.version",
-                "drupal/test_basetheme": "self.version",
-                "drupal/test_subtheme": "self.version",
-                "drupal/test_theme": "self.version",
-                "drupal/testing": "self.version",
-                "drupal/text": "self.version",
-                "drupal/toolbar": "self.version",
-                "drupal/tracker": "self.version",
-                "drupal/translation": "self.version",
-                "drupal/trigger": "self.version",
-                "drupal/update": "self.version",
-                "drupal/user": "self.version"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-7.x-28.x": "7.28.x"
-                }
-            },
-            "notification-url": "http://drupal-packagist.org/downloads/",
-            "description": "Handles general site configuration for administrators."
-        },
-        {
-            "name": "drupal/panels",
-            "version": "7.3.3",
-            "source": {
-                "type": "git",
-                "url": "http://git.drupal.org/project/panels",
-                "reference": "6662e3b87186e42b677030eae63702fdb8061531"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "http://ftp.drupal.org/files/projects/panels-7.x-3.3.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "composer/installers": "~1.0",
-                "drupal/ctools": "7.*",
-                "drupal/drupal": "7.*"
-            },
-            "replace": {
-                "drupal/panels_ipe": "self.version",
-                "drupal/panels_mini": "self.version",
-                "drupal/panels_node": "self.version"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-7.x-3.x": "7.3.x"
-                }
-            },
-            "notification-url": "http://drupal-packagist.org/downloads/",
-            "description": "Core Panels display functions; provides no external UI, at least one other Panels module should be enabled."
-        },
-        {
-            "name": "drupal/views",
-            "version": "7.3.8",
-            "source": {
-                "type": "git",
-                "url": "http://git.drupal.org/project/views",
-                "reference": "dd711929f95788e32a15b3d19fb32c0c7c0a263d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "http://ftp.drupal.org/files/projects/views-7.x-3.8.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "composer/installers": "~1.0",
-                "drupal/ctools": "7.*",
-                "drupal/drupal": "7.*"
-            },
-            "replace": {
-                "drupal/views_ui": "self.version"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-7.x-3.x": "7.3.x"
-                }
-            },
-            "notification-url": "http://drupal-packagist.org/downloads/",
-            "description": "Create customized lists and queries from your database."
+            "time": "2014-01-06 18:39:59"
         },
         {
             "name": "justinrainbow/json-schema",
-            "version": "1.3.6",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/justinrainbow/json-schema.git",
-                "reference": "d97cf3ce890fe80f247fc08594a1c8a1029fc7ed"
+                "reference": "05ff6d8d79fe3ad190b0663d80d3f9deee79416c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/d97cf3ce890fe80f247fc08594a1c8a1029fc7ed",
-                "reference": "d97cf3ce890fe80f247fc08594a1c8a1029fc7ed",
+                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/05ff6d8d79fe3ad190b0663d80d3f9deee79416c",
+                "reference": "05ff6d8d79fe3ad190b0663d80d3f9deee79416c",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
-            "require-dev": {
-                "json-schema/json-schema-test-suite": "1.1.0",
-                "phpdocumentor/phpdocumentor": "~2",
-                "phpunit/phpunit": "~3.7"
-            },
-            "bin": [
-                "bin/validate-json"
-            ],
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.4.x-dev"
-                }
-            },
             "autoload": {
                 "psr-0": {
                     "JsonSchema": "src/"
@@ -420,7 +101,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "BSD-3-Clause"
+                "NewBSD"
             ],
             "authors": [
                 {
@@ -448,7 +129,7 @@
                 "json",
                 "schema"
             ],
-            "time": "2014-03-05 15:03:52"
+            "time": "2012-01-03 00:33:17"
         },
         {
             "name": "seld/jsonlint",
@@ -708,7 +389,7 @@
     "stability-flags": {
         "symfony/filesystem": 0,
         "symfony/finder": 0,
-        "composer/composer": 20
+        "composer/composer": 15
     },
     "platform": [],
     "platform-dev": []

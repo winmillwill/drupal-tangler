@@ -3,9 +3,8 @@
     "require": {
         "symfony/filesystem": "*@stable",
         "symfony/finder": "*@stable",
-        "drupal/views": "7.*",
         "symfony/console": "*",
-        "composer/composer": "*@dev"
+        "composer/composer": "~1.0@alpha"
     },
     "autoload": {
         "psr-4": {
