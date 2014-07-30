@@ -107,9 +107,6 @@ class Mapper
                 }
             }
         }
-        if (!$this->name) {
-            throw new \Exception('No drupal info file found');
-        }
         return $this->name;
     }
 
@@ -118,13 +115,15 @@ class Mapper
         $root   = $this->getRoot();
         $fs     = $this->getFS();
         $paths  = [];
-        foreach ($this->getCustomFilesFinder() as $file) {
-            $install = $fs->makePathRelative($file->getRealpath(), $root);
-            $paths["custom"][$install] = sprintf(
-                $this->getTypePathMap('module').'/%s',
-                $this->getName(),
-                $file->getFilename()
-            );
+        if ($name = $this->getName()) {
+            foreach ($this->getCustomFilesFinder() as $file) {
+                $install = $fs->makePathRelative($file->getRealpath(), $root);
+                $paths["custom"][$install] = sprintf(
+                    $this->getTypePathMap('module').'/%s',
+                    $name,
+                    $file->getFilename()
+                );
+            }
         }
         return $paths;
     }
