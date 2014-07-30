@@ -88,6 +88,11 @@ class Mapper
             ->ignoreUnreadableDirs()
             ->ignoreVCS(true)
             ->exclude(['vendor', 'www'])
+            ->name('*.php')
+            ->name('*.inc')
+            ->name('*.module')
+            ->name('*.info')
+            ->name('*.install')
             ->depth('== 0')
             ->in($this->getRoot());
         return $finder;
