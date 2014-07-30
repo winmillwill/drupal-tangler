@@ -28,8 +28,8 @@ class Command extends BaseCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $mapper = new Mapper(
-            $input->getArgument('project')  ?: getcwd(),
-            $input->getArgument('drupal')   ?: 'www'
+            implode('/', [getcwd(), $input->getArgument('project')]),
+            implode('/', [getcwd(), $input->getArgument('drupal')])
         );
         $mapper->clear();
         $mapper->mirror($mapper->getMap(

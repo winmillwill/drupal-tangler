@@ -9,7 +9,7 @@ class ScriptHandler
     public static function postUpdate(Event $event)
     {
         $composer = $event->getComposer();
-        $mapper = new Mapper(null, 'www');
+        $mapper = new Mapper(getcwd(), 'www');
         $mapper->mirror($mapper->getMap(
             $composer->getInstallationManager(),
             $composer->getRepositoryManager()

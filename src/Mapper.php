@@ -14,7 +14,8 @@ class Mapper
     private $root   = false;
     private $name   = false;
 
-    public function __construct($path = null, $drupal = null) {
+    public function __construct($path, $drupal)
+    {
         $this->root   = $path;
         $this->drupal = $drupal;
     }
@@ -24,21 +25,9 @@ class Mapper
         return $this->fs ? $this->fs : $this->fs = new Filesystem();
     }
 
-    private function getRoot()
+    public function getRoot()
     {
-        if ($this->root) {
-            return $this->root;
-        }
-        $paths = ['/'];
-        foreach(array_filter(explode('/', getcwd())) as $dir) {
-            $paths[] = end($paths).$dir.'/';
-        }
-        $fs = $this->getFS();
-        foreach (array_reverse($paths) as $path) {
-            if ($fs->exists($path.'/composer.json')) {
-                return $this->root = $path;
-            }
-        }
+        return $this->root;
     }
 
     private function getFinder()
@@ -117,7 +106,7 @@ class Mapper
         $paths  = [];
         if ($name = $this->getName()) {
             foreach ($this->getCustomFilesFinder() as $file) {
-                $install = $fs->makePathRelative($file->getRealpath(), $root);
+                $install = rtrim($fs->makePathRelative($file->getRealpath(), $root), '/');
                 $paths["custom"][$install] = sprintf(
                     $this->getTypePathMap('module').'/%s',
                     $name,
@@ -149,20 +138,16 @@ class Mapper
         foreach ($map as $type => $pathMap) {
             foreach ($pathMap as $installPath => $targetPath) {
                 if ($fs->exists("$root/$installPath")) {
-                    $dest = rtrim($fs->makePathRelative(
-                        "$root/$targetPath",
-                        getcwd()
-                    ), '/');
                     if ($type === 'core') {
-                        $fs->mirror("$root/$installPath", "$root/$dest");
+                        $fs->mirror("$root/$installPath", "$root/$targetPath");
                     }
                     else {
                         $fs->symlink(
-                            substr($fs->makePathRelative(
+                            rtrim(substr($fs->makePathRelative(
                                 "$root/$installPath",
-                                "$root/$dest"
-                            ), 3),
-                            $dest,
+                                $targetPath
+                            ), 3), '/'),
+                            $targetPath,
                             true
                         );
                     }
