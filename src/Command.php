@@ -21,7 +21,8 @@ class Command extends BaseCommand
             ->addArgument(
                 'drupal',
                 InputArgument::OPTIONAL,
-                'path to drupal in which to tangle'
+                'path to drupal in which to tangle',
+                'www'
             );
     }
 
