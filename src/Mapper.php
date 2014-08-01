@@ -41,6 +41,7 @@ class Mapper
             $this->mapContrib($im, $rm),
             $this->mapCustom(),
             $this->mapSettings(),
+            $this->mapVendor(),
             $this->mapFiles()
         );
     }
@@ -128,6 +129,13 @@ class Mapper
     {
         return [
             'settings' => ['cnf/settings.php' => $this->drupal.'/sites/default/settings.php']
+        ];
+    }
+
+    public function mapVendor()
+    {
+        return [
+            'vendor' => ['vendor' => $this->drupal.'/sites/default/vendor']
         ];
     }
 
