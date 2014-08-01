@@ -39,6 +39,8 @@ class Mapper
     {
         return array_merge(
             $this->mapContrib($im, $rm),
+            $this->mapByType('module'),
+            $this->mapByType('theme'),
             $this->mapCustom(),
             $this->mapSettings(),
             $this->mapVendor(),
@@ -77,15 +79,29 @@ class Mapper
         $finder = $this->getFinder()
             ->ignoreUnreadableDirs()
             ->ignoreVCS(true)
-            ->exclude(['vendor', 'www'])
-            ->name('*.php')
-            ->name('*.inc')
-            ->name('*.module')
-            ->name('*.info')
-            ->name('*.install')
+            ->exclude(['vendor', 'www', 'cnf'])
             ->depth('== 0')
-            ->in($this->getRoot());
+            ->in($this->getRoot())
+            ->name("*.php")
+            ->name("*.inc")
+            ->name("*.module")
+            ->name("*.info")
+            ->name("*.install")
+            ->name('src')
+            ->name('lib');
         return $finder;
+    }
+
+    private function getTypeFinder($type)
+    {
+        if (file_exists($dir = $this->getRoot()."/{$type}s")) {
+            $finder = $this->getFinder()
+                ->ignoreUnreadableDirs()
+                ->depth('== 0')
+                ->in($dir);
+            return $finder;
+        }
+        return [];
     }
 
     private function getName()
@@ -137,6 +153,21 @@ class Mapper
         return [
             'vendor' => ['vendor' => $this->drupal.'/sites/default/vendor']
         ];
+    }
+
+    public function mapByType($type)
+    {
+        $paths  = [];
+        $root   = $this->getRoot();
+        $fs     = $this->getFS();
+        foreach ($this->getTypeFinder($type) as $file) {
+            $install = rtrim($fs->makePathRelative($file->getRealpath(), $root), '/');
+            $paths["{$type}s"][$install] = sprintf(
+                $this->getTypePathMap($type),
+                $file->getFilename()
+            );
+        }
+        return $paths;
     }
 
     public function mirror($map)
