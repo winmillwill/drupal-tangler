@@ -16,8 +16,8 @@ class Mapper
 
     public function __construct($path, $drupal)
     {
-        $this->root   = $path;
-        $this->drupal = $drupal;
+        $this->root   = rtrim($path, '/');
+        $this->drupal = rtrim($drupal, '/');
     }
 
     private function getFS()
