@@ -54,21 +54,24 @@ class Mapper
         $typeInstallMap = [];
         $packages = $rm->getLocalRepository()
             ->getCanonicalPackages();
+        $unmappedTypes = array('drush');
         foreach ($packages as $package) {
             if ($drupalType = $this->getDrupalType($package)) {
-                $installPath = $im->getInstaller($package->getType())
-                    ->getInstallPath($package);
-                if (strpos($installPath, $root = $this->getRoot()) !== false) {
-                    $installPath = $this->getFS()->makePathRelative(
-                        $installPath,
-                        $root
+                if (!in_array($drupalType, $unmappedTypes)) {
+                    $installPath = $im->getInstaller($package->getType())
+                        ->getInstallPath($package);
+                    if (strpos($installPath, $root = $this->getRoot()) !== false) {
+                        $installPath = $this->getFS()->makePathRelative(
+                            $installPath,
+                            $root
+                        );
+                    }
+                    $name = explode('/', $package->getPrettyName())[1];
+                    $typeInstallMap[$drupalType][rtrim($installPath, '/')] = sprintf(
+                        $typePathMap[$drupalType],
+                        $name
                     );
                 }
-                $name = explode('/', $package->getPrettyName())[1];
-                $typeInstallMap[$drupalType][rtrim($installPath, '/')] = sprintf(
-                    $typePathMap[$drupalType],
-                    $name
-                );
             }
         }
         return array_intersect_key($typeInstallMap, $typePathMap);
