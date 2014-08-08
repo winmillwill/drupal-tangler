@@ -181,7 +181,7 @@ class Mapper
             foreach ($pathMap as $installPath => $targetPath) {
                 if ($fs->exists("$root/$installPath")) {
                     if ($type === 'core') {
-                        $fs->mirror("$root/$installPath", "$root/$targetPath");
+                        $fs->mirror("$root/$installPath", "$targetPath");
                     }
                     else {
                         $fs->symlink(
