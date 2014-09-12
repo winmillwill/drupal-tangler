@@ -66,7 +66,8 @@ class Mapper
                 }
                 $name = explode('/', $package->getPrettyName())[1];
                 $typeInstallMap[$drupalType][rtrim($installPath, '/')] = sprintf(
-                    $typePathMap[$drupalType],
+                    $typePathMap[$drupalType] . '/%s',
+                    'contrib',
                     $name
                 );
             }
