@@ -65,11 +65,17 @@ class Mapper
                     );
                 }
                 $name = explode('/', $package->getPrettyName())[1];
-                $typeInstallMap[$drupalType][rtrim($installPath, '/')] = sprintf(
-                    $typePathMap[$drupalType] . '/%s',
-                    'contrib',
-                    $name
-                );
+                $mapRef =& $typeInstallMap[$drupalType][rtrim($installPath, '/')] ;
+                if (in_array($drupalType, ['module', 'theme'])) {
+                    $mapRef = sprintf(
+                        $typePathMap[$drupalType] . '/%s',
+                        'contrib',
+                        $name
+                    );
+                }
+                else {
+                    $mapRef = $typePathMap[$drupalType];
+                }
             }
         }
         return array_intersect_key($typeInstallMap, $typePathMap);
