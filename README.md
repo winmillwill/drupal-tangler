@@ -8,7 +8,7 @@ it from a web server.
 The algorithm is something like this:
 
 1. copy drupal/drupal out of vendor and into the given drupal path (default: www)
-2. link modules and themese installed with composer from vendor into the drupal
+2. link modules and themes installed with composer from vendor into the drupal
    root
 3. link directories from the modules directory into sites/all/modules
 4. link directories from the themes directory into sites/all/themes
