@@ -56,6 +56,11 @@ class Mapper
             ->getCanonicalPackages();
         foreach ($packages as $package) {
             if ($drupalType = $this->getDrupalType($package)) {
+
+                if (!isset($typePathMap[$drupalType])) {
+                  continue;
+                }
+
                 $installPath = $im->getInstaller($package->getType())
                     ->getInstallPath($package);
                 if (strpos($installPath, $root = $this->getRoot()) !== false) {
