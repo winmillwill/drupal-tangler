@@ -51,7 +51,7 @@ class Mapper
     public function mapContrib(InstallationManager $im, RepositoryManager $rm)
     {
         $typePathMap = $this->getTypePathMap();
-        $typeInstallMap = [];
+        $typeInstallMap = array();
         $packages = $rm->getLocalRepository()
             ->getCanonicalPackages();
         foreach ($packages as $package) {
@@ -64,9 +64,14 @@ class Mapper
                         $root
                     );
                 }
-                $name = explode('/', $package->getPrettyName())[1];
+                $names = explode('/', $package->getPrettyName());
+                $name = $names[1];
+                $typeInstallMap[$drupalType][rtrim($installPath, '/')] = sprintf(
+                    $typePathMap[$drupalType],
+                    $name
+                );
                 $mapRef =& $typeInstallMap[$drupalType][rtrim($installPath, '/')] ;
-                if (in_array($drupalType, ['module', 'theme'])) {
+                if (in_array($drupalType, array('module', 'theme'))) {
                     $mapRef = sprintf(
                         $typePathMap[$drupalType] . '/%s',
                         'contrib',
@@ -86,7 +91,7 @@ class Mapper
         $finder = $this->getFinder()
             ->ignoreUnreadableDirs()
             ->ignoreVCS(true)
-            ->exclude(['vendor', 'www', 'cnf'])
+            ->exclude(array('vendor', 'www', 'cnf'))
             ->depth('== 0')
             ->in($this->getRoot())
             ->name("*.php")
@@ -108,7 +113,7 @@ class Mapper
                 ->in($dir);
             return $finder;
         }
-        return [];
+        return array();
     }
 
     private function getName()
@@ -127,7 +132,7 @@ class Mapper
     {
         $root   = $this->getRoot();
         $fs     = $this->getFS();
-        $paths  = [];
+        $paths  = array();
         if ($name = $this->getName()) {
             foreach ($this->getCustomFilesFinder() as $file) {
                 $install = rtrim($fs->makePathRelative($file->getRealpath(), $root), '/');
@@ -143,28 +148,28 @@ class Mapper
 
     public function mapFiles()
     {
-        return [
-            'files' => ['cnf/files' => $this->drupal.'/sites/default/files']
-        ];
+        return array(
+            'files' => array('cnf/files' => $this->drupal.'/sites/default/files')
+        );
     }
 
     public function mapSettings()
     {
-        return [
-            'settings' => ['cnf/settings.php' => $this->drupal.'/sites/default/settings.php']
-        ];
+        return array(
+            'settings' => array('cnf/settings.php' => $this->drupal.'/sites/default/settings.php')
+        );
     }
 
     public function mapVendor()
     {
-        return [
-            'vendor' => ['vendor' => $this->drupal.'/sites/default/vendor']
-        ];
+        return array(
+            'vendor' => array('vendor' => $this->drupal.'/sites/default/vendor')
+        );
     }
 
     public function mapByType($type)
     {
-        $paths  = [];
+        $paths  = array();
         $root   = $this->getRoot();
         $fs     = $this->getFS();
         foreach ($this->getTypeFinder($type) as $file) {
@@ -204,18 +209,19 @@ class Mapper
 
     public function clear()
     {
-        $this->getFS()->remove(['directory', $this->getTypePathMap()['core']]);
+        $typePathMap = $this->getTypePathMap();
+        $this->getFS()->remove(array('directory', $typePathMap['core']));
     }
 
     public function getTypePathMap($type = null)
     {
-        $map = [
+        $map = array(
             'core'    => $this->drupal,
             'module'  => $this->drupal.'/sites/all/modules/%s',
             'theme'   => $this->drupal.'/sites/all/themes/%s',
             'drush'   => $this->drupal.'/sites/all/drush/%s',
             'profile' => $this->drupal.'/profiles/%s'
-        ];
+        );
         if ($type) {
             return $map[$type];
         }

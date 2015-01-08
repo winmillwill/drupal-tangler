@@ -29,8 +29,8 @@ class Command extends BaseCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $mapper = new Mapper(
-            implode('/', [getcwd(), $input->getArgument('project')]),
-            implode('/', [getcwd(), $input->getArgument('drupal')])
+            implode('/', array(getcwd(), $input->getArgument('project'))),
+            implode('/', array(getcwd(), $input->getArgument('drupal')))
         );
         $mapper->clear();
         $mapper->mirror($mapper->getMap(
