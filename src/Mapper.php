@@ -128,7 +128,7 @@ class Mapper
         $root   = $this->getRoot();
         $fs     = $this->getFS();
         $paths  = [];
-        if ($name = $this->getName()) {
+        if ($name == $this->getName()) {
             foreach ($this->getCustomFilesFinder() as $file) {
                 $install = rtrim($fs->makePathRelative($file->getRealpath(), $root), '/');
                 $paths["custom"][$install] = sprintf(
